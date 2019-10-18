@@ -1,0 +1,2 @@
+include ':app', ':xcrash'
+rootProject.name='JNIDemo'
