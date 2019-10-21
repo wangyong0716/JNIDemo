@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void crash() {
-    crashInJava();
+//    crashInJava();
     jniTv.setText(JniUtil.sayHello());
   }
 
@@ -169,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public String getLogDir() {
-    return getFilesDir().getPath();
-    //    return Environment.getExternalStorageDirectory().getAbsolutePath();
+//    return getFilesDir().getPath();
+        return Environment.getExternalStorageDirectory().getAbsolutePath();
   }
 
   private final int REQUEST_CODE_ASK_PERMISSIONS = 123;

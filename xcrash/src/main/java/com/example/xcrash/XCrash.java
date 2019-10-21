@@ -109,8 +109,8 @@ public final class XCrash {
 
         //save log dir
         if (TextUtils.isEmpty(params.logDir)) {
-            params.logDir = ctx.getFilesDir() + "/tombstones";
-//            params.logDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tombstones";
+//            params.logDir = ctx.getFilesDir() + "/tombstones";
+            params.logDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tombstones";
         }
         XCrash.logDir = params.logDir;
 
