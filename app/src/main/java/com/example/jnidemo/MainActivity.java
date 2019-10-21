@@ -1,9 +1,11 @@
 package com.example.jnidemo;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +14,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import com.example.jnidemo.ui.FileContentActivity;
 import com.example.jnidemo.util.BackGroudHandler;
 import com.example.jnidemo.util.FileUtil;
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    checkPermission();
 
     jniTv = findViewById(R.id.jni);
     dir = findViewById(R.id.dir);
@@ -113,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void crashInJava() {
     Object o = null;
-    int i = (int)o;
+    int i = (int) o;
   }
 
   class FileAdapter extends BaseAdapter {
@@ -163,6 +170,47 @@ public class MainActivity extends AppCompatActivity {
 
   public String getLogDir() {
     return getFilesDir().getPath();
-//    return Environment.getExternalStorageDirectory().getAbsolutePath();
+    //    return Environment.getExternalStorageDirectory().getAbsolutePath();
+  }
+
+  private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
+  public void checkPermission() {
+    if (Build.VERSION.SDK_INT >= 23) {
+      List<String> permissionStrs = new ArrayList<>();
+      int hasWriteSdcardPermission =
+          ContextCompat.checkSelfPermission(
+              MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+      if (hasWriteSdcardPermission != PackageManager.PERMISSION_GRANTED) {
+        permissionStrs.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+      }
+
+      int hasCameraPermission =
+          ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA);
+      if (hasCameraPermission != PackageManager.PERMISSION_GRANTED) {
+        permissionStrs.add(Manifest.permission.CAMERA);
+      }
+      String[] stringArray = permissionStrs.toArray(new String[0]);
+      if (permissionStrs.size() > 0) {
+        requestPermissions(stringArray, REQUEST_CODE_ASK_PERMISSIONS);
+        return;
+      }
+    }
+  }
+
+  // 权限设置后的回调函数，判断相应设置，requestPermissions传入的参数为几个权限，则permissions和grantResults为对应权限和设置结果
+  @Override
+  public void onRequestPermissionsResult(
+      int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    switch (requestCode) {
+      case REQUEST_CODE_ASK_PERMISSIONS:
+        // 可以遍历每个权限设置情况
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+          // 这里写你需要相关权限的操作
+        } else {
+          Toast.makeText(MainActivity.this, "权限没有开启", Toast.LENGTH_SHORT).show();
+        }
+    }
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
 }
