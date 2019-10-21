@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
       case R.id.crash:
         crash();
         break;
+      case R.id.anr:
+        anr();
+        break;
       case R.id.list:
         showFilePath();
         break;
@@ -115,11 +118,32 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void crash() {
-//    crashInJava();
+//    javaCrash();
     jniTv.setText(JniUtil.sayHello());
   }
 
-  private void crashInJava() {
+  private void nativeCrash() {
+    jniTv.setText(JniUtil.testNativeCrash());
+  }
+
+  private void anr() {
+    javaAnr();
+//    nativeAnr();
+  }
+
+  private void javaAnr() {
+    try{
+    Thread.sleep(20000);
+    }catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void nativeAnr() {
+    jniTv.setText(JniUtil.testNativeAnr());
+  }
+
+  private void javaCrash() {
     Object o = null;
     int i = (int) o;
   }

@@ -6,6 +6,8 @@ public class JniUtil {
   }
 
   public static native String sayHello();
+  public static native String testNativeCrash();
+  public static native String testNativeAnr();
 
   public static void callJavaMethod(String str) {
     System.out.println("callJavaMethod -> " + str);

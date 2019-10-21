@@ -22,6 +22,15 @@
       android:text="CRASH" />
 
     <Button
+      android:id="@+id/anr"
+      android:layout_width="120dip"
+      android:layout_height="60dip"
+      android:layout_marginTop="20dip"
+      android:gravity="center"
+      android:onClick="handleClick"
+      android:text="ANR" />
+
+    <Button
       android:id="@+id/list"
       android:layout_width="120dip"
       android:layout_height="60dip"

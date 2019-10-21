@@ -15,6 +15,11 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_sayHello
   (JNIEnv *, jclass);
 
+JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_testNativeCrash
+    (JNIEnv *, jclass);
+
+JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_testNativeAnr
+    (JNIEnv *, jclass);
 #ifdef __cplusplus
 }
 #endif
