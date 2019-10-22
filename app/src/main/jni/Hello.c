@@ -63,19 +63,20 @@ JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_sayHello(JNIEnv *env,
   callJavaVoidMethod(env, thiz);
   jstring res = callJavaMethod(env, thiz);
   callJavaVoidMethodWithMsg(env, thiz, res);
-  jint ri = callJavaMethod(env, thiz);
+//  jint ri = callJavaMethod(env, thiz);
 //  ri += 1;
 //  LOGE("before sleep");
 //  sleep(10);
 //  LOGE("after sleep");
-  callJavaVoidMethodWithMsg(env, thiz, ri);
+//  callJavaVoidMethodWithMsg(env, thiz, ri);
   return (*env)->NewStringUTF(env, "hello world");
 }
 
 JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_testNativeCrash(JNIEnv *env, jclass thiz) {
   jint ri = callJavaMethod(env, thiz);
   ri += 1;
-  return (*env)->NewStringUTF(env, "hello world");
+  callJavaVoidMethodWithMsg(env, thiz, ri);
+  return (*env)->NewStringUTF(env, "native crash");
 }
 
 JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_testNativeAnr(JNIEnv *env, jclass thiz) {

@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void crash() {
 //    javaCrash();
-    jniTv.setText(JniUtil.sayHello());
+    nativeCrash();
   }
 
   private void nativeCrash() {
