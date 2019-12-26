@@ -59,7 +59,7 @@ void callJavaVoidMethodWithMsg(JNIEnv *env, jobject thiz, jstring msg) {
   (*env)->CallStaticVoidMethod(env, clazz, id, msg);
 }
 
-JNIEXPORT jstring JNICALL Java_JNI_METHOD_CALL_JAVA_METHOD_sayHello(JNIEnv *env, jclass thiz) {
+JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_sayHello(JNIEnv *env, jclass thiz) {
   callJavaVoidMethod(env, thiz);
   jstring res = callJavaMethod(env, thiz);
   callJavaVoidMethodWithMsg(env, thiz, res);
