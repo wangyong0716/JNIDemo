@@ -20,6 +20,13 @@ JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_testNativeCrash
 
 JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_testNativeAnr
     (JNIEnv *, jclass);
+
+#define JNI_CLASS_NAME "com/example/jnidemo/JniUtil"
+#define JNI_METHOD_GET_STRING_FROM_JAVA "getStringFromJava"
+#define JNI_METHOD_GET_STRING_FROM_JAVA_SIGNATURE "(Ljava/lang/String;)Ljava/lang/String;"
+#define JNI_METHOD_CALL_JAVA_METHOD "callJavaMethod"
+#define JNI_METHOD_CALL_JAVA_METHOD_SIGNATURE "(Ljava/lang/String;)V"
+
 #ifdef __cplusplus
 }
 #endif

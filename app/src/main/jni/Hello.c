@@ -10,15 +10,15 @@
 
 
 jobject callJavaMethod(JNIEnv *env, jobject thiz) {
-  jclass clazz = (*env)->FindClass(env, "com/example/jnidemo/JniUtil");
+  jclass clazz = (*env)->FindClass(env, JNI_CLASS_NAME);
   if (clazz == NULL) {
     printf("find class JniUtil error!");
     return "";
   }
   jmethodID id = (*env)->GetStaticMethodID(env,
                                            clazz,
-                                           "getStringFromJava",
-                                           "(Ljava/lang/String;)Ljava/lang/String;");
+                                           JNI_METHOD_GET_STRING_FROM_JAVA,
+                                           JNI_METHOD_GET_STRING_FROM_JAVA_SIGNATURE);
   if (id == NULL) {
     printf("find method getStringFromJava error!");
     return "";
@@ -31,12 +31,12 @@ jobject callJavaMethod(JNIEnv *env, jobject thiz) {
 }
 
 void callJavaVoidMethod(JNIEnv *env, jobject thiz) {
-  jclass clazz = (*env)->FindClass(env, "com/example/jnidemo/JniUtil");
+  jclass clazz = (*env)->FindClass(env, JNI_CLASS_NAME);
   if (clazz == NULL) {
     printf("find class JniUtil error!");
     return;
   }
-  jmethodID id = (*env)->GetStaticMethodID(env, clazz, "callJavaMethod", "(Ljava/lang/String;)V");
+  jmethodID id = (*env)->GetStaticMethodID(env, clazz, JNI_METHOD_CALL_JAVA_METHOD, JNI_METHOD_CALL_JAVA_METHOD_SIGNATURE);
   if (id == NULL) {
     printf("find method callJavaMethod error!");
     return;
@@ -46,12 +46,12 @@ void callJavaVoidMethod(JNIEnv *env, jobject thiz) {
 }
 
 void callJavaVoidMethodWithMsg(JNIEnv *env, jobject thiz, jstring msg) {
-  jclass clazz = (*env)->FindClass(env, "com/example/jnidemo/JniUtil");
+  jclass clazz = (*env)->FindClass(env, JNI_CLASS_NAME);
   if (clazz == NULL) {
     printf("find class JniUtil error!");
     return;
   }
-  jmethodID id = (*env)->GetStaticMethodID(env, clazz, "callJavaMethod", "(Ljava/lang/String;)V");
+  jmethodID id = (*env)->GetStaticMethodID(env, clazz, JNI_METHOD_CALL_JAVA_METHOD, JNI_METHOD_CALL_JAVA_METHOD_SIGNATURE);
   if (id == NULL) {
     printf("find method callJavaMethod error!");
     return;
@@ -59,7 +59,7 @@ void callJavaVoidMethodWithMsg(JNIEnv *env, jobject thiz, jstring msg) {
   (*env)->CallStaticVoidMethod(env, clazz, id, msg);
 }
 
-JNIEXPORT jstring JNICALL Java_com_example_jnidemo_JniUtil_sayHello(JNIEnv *env, jclass thiz) {
+JNIEXPORT jstring JNICALL Java_JNI_METHOD_CALL_JAVA_METHOD_sayHello(JNIEnv *env, jclass thiz) {
   callJavaVoidMethod(env, thiz);
   jstring res = callJavaMethod(env, thiz);
   callJavaVoidMethodWithMsg(env, thiz, res);
