@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import com.didichuxing.doraemonkit.kit.methodtrace.MethodCost;
 import com.example.jnidemo.ui.FileContentActivity;
 import com.example.jnidemo.util.BackGroudHandler;
 import com.example.jnidemo.util.FileUtil;
@@ -127,13 +128,15 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void anr() {
+    MethodCost.startMethodTracing("anr");
     javaAnr();
+    MethodCost.stopMethodTracingAndPrintLog("anr");
 //    nativeAnr();
   }
 
   private void javaAnr() {
     try{
-    Thread.sleep(20000);
+    Thread.sleep(2000);
     }catch(Exception e) {
       e.printStackTrace();
     }

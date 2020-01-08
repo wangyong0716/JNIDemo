@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.didi.dokit'
 
 android {
     compileSdkVersion 29
@@ -6,12 +7,12 @@ android {
     sourceSets.main.jniLibs.srcDirs = ['src/main/jnilibs']
     defaultConfig {
         applicationId "com.example.jnidemo"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        multiDexEnabled true
 //        ndk {
 //            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
 //        }
@@ -35,6 +36,10 @@ android {
 //            path 'src/main/jni/Android.mk'
 //        }
 //    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -44,10 +49,26 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.android.support:multidex:1.0.3'
     api project(':xcrash')
+    implementation 'me.ele:lancet-plugin:1.0.4'
 //
 //    api 'com.tantanapp.library:beatles-monitor-crash:1.0.4.3'
 //    api 'com.tantanapp.library:beatles-monitor-anr:1.0.4.3'
 //    api 'com.tantanapp.library:beatles-monitor-native:1.0.4.3'
 //    api 'com.tantanapp.library:beatles-monitor-fps:1.0.4.3'
+
+    //base
+    debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:2.2.1'
+    releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:2.2.1'
+    /**
+     * Console 日志查看
+     * Storage 缓存查看
+     * 容器信息
+     * DevTool
+     */
+    debugImplementation 'com.didichuxing.doraemonkit:doraemonkit-leakcanary:2.2.1'
+    //泄露
+    debugImplementation 'com.didichuxing.doraemonkit:doraemonkit-leakcanary:2.2.1'
+
 }

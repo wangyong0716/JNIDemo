@@ -12,6 +12,7 @@ buildscript {
 //        }
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
         
     }
     dependencies {
@@ -19,6 +20,14 @@ buildscript {
         
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        /**
+         * AOP包括以下几个功能:
+         * 1)百度、腾讯、高德地图的经纬度模拟
+         * 2)UrlConnection、Okhttp 抓包以及后续的接口hook功能
+         * 3)App 启动耗时统计
+         */
+        classpath 'com.didichuxing.doraemonkit:doraemonkit-plugin:1.0.0'
     }
 }
 
@@ -36,6 +45,7 @@ allprojects {
 //        }
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
         
     }
 }
